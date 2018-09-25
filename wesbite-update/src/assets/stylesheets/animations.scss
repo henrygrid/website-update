@@ -1,3 +1,5 @@
+//Skill Rotating Animations
+
 @keyframes rotate-clockwise {
   0% {
     transform: rotate(0deg);
@@ -16,6 +18,8 @@
     transform: rotate(-359deg);
   }
 }
+
+//Scroll Down Mouse Animations
 
 @keyframes arrow_intro {
   0%, 50% {
@@ -41,5 +45,47 @@
   100% {
     opacity: 1;
     stroke-dashoffset: 0;
+  }
+}
+
+//Nav Menu Animations
+
+@keyframes ham-top-to-cross {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes ham-top-to-burger {
+  from {
+    transform: rotate(45deg);
+  }
+
+  to {
+    transform: rotate(0);
+  }
+}
+
+@keyframes ham-middle-to-cross {
+  from {
+    transform: translateY(0) rotate(0);
+  }
+
+  to {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+@keyframes ham-middle-to-burger {
+  from {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  to {
+    transform: translateY(0) rotate(0);
   }
 }
