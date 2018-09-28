@@ -1,21 +1,13 @@
 <template>
-  <div class="projects-view slider">
-    <div class="projects-wrapper">
+  <div class="blog-view slider">
+    <div class="blog-wrapper">
       <AppHeader></AppHeader>
-      <section class="projects">
-        <h1 class="projects-heading">My Work</h1>
-        <div class="project-wrapper" v-for="project in projects">
-          <router-link :to="'/projects/' + project.url" :id="project.url" class="project-image"></router-link>
-          <p class="project-name">{{project.title}}</p>
+      <section class="blog">
+        <div class="blog-header">
+          <h1 class="blog-heading">{{post.title}}</h1>
         </div>
-        <!-- <div class="project-wrapper">
-          <router-link to="/projects/rostered" id="rostered" class="project-image-reverse"></router-link>
-          <p class="project-name-reverse">Rostered</p>
-        </div> -->
-      </section>
-      <section class="connect">
-        <h1 class="connect-main-heading">Want to start a conversation about how you can be next?</h1>
-        <router-link to="/contact" class="connect-link">Let's Connect</router-link>
+        <article class="blog-content" v-html="post.body">
+        </article>
       </section>
       <AppFooter></AppFooter>
     </div>
@@ -30,14 +22,15 @@ import Router from 'vue-router'
 import { butter } from '@/butter.js';
 
 export default {
-    name: 'Projects',
+    name: 'BlogPost',
     components: {
       AppHeader,
       AppFooter
     },
     data() {
         return {
-          projects: []
+          posts: [],
+          post: {}
         };
     },
     methods: {
@@ -48,21 +41,25 @@ export default {
           $(".ham").css("background-color", "#002244");
         }
       },
-      getProjects() {
-        butter.content.retrieve(['projects'])
-          .then((resp) => {
-            this.projects = resp.data.data.projects;
-            console.log(this.projects);
-          }).catch((resp) => {
-            console.log(resp)
+      getPosts() {
+        butter.post.list({page: 1, page_size: 4})
+          .then((res) => {
+            let posts = res.data.data;
+            this.posts = posts;
+            posts.map((post) => {
+              if(post.slug === this.$route.params.name) {
+                this.post = post;
+                console.log(post);
+              }
+            });
           });
-      }
+      },
     },
     mounted() {
       $(".ham").css("background-color", "#002244");
     },
     created() {
-      this.getProjects();
+      this.getPosts();
       window.addEventListener('scroll', this.handleScroll);
     },
     destroyed() {
@@ -78,5 +75,5 @@ export default {
 @import "@/assets/stylesheets/animations.scss";
 @import "@/assets/stylesheets/reset.scss";
 @import "@/assets/stylesheets/fonts.scss";
-@import "@/assets/stylesheets/projects.scss";
+@import "@/assets/stylesheets/blog.scss";
 </style>

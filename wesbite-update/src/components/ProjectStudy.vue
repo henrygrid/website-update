@@ -1,17 +1,15 @@
 <template>
   <div class="projects-view slider">
     <div class="projects-wrapper">
+      <div class="projects-banner"></div>
       <AppHeader></AppHeader>
       <section class="projects">
-        <h1 class="projects-heading">My Work</h1>
-        <div class="project-wrapper" v-for="project in projects">
-          <router-link :to="'/projects/' + project.url" :id="project.url" class="project-image"></router-link>
-          <p class="project-name">{{project.title}}</p>
+        <div class="projects-header">
+          <h1 class="projects-heading">{{project.title}}</h1>
         </div>
-        <!-- <div class="project-wrapper">
-          <router-link to="/projects/rostered" id="rostered" class="project-image-reverse"></router-link>
-          <p class="project-name-reverse">Rostered</p>
-        </div> -->
+        <article class="projects-content">
+            <p>{{project.description}}</p>
+        </article>
       </section>
       <section class="connect">
         <h1 class="connect-main-heading">Want to start a conversation about how you can be next?</h1>
@@ -30,14 +28,15 @@ import Router from 'vue-router'
 import { butter } from '@/butter.js';
 
 export default {
-    name: 'Projects',
+    name: 'ProjectStudy',
     components: {
       AppHeader,
       AppFooter
     },
     data() {
         return {
-          projects: []
+          projects: [],
+          project: {}
         };
     },
     methods: {
@@ -52,6 +51,12 @@ export default {
         butter.content.retrieve(['projects'])
           .then((resp) => {
             this.projects = resp.data.data.projects;
+            this.projects.map((project) => {
+              if(project.url === this.$route.params.name) {
+                this.project = project;
+                console.log(project);
+              }
+            });
             console.log(this.projects);
           }).catch((resp) => {
             console.log(resp)

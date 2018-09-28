@@ -1,5 +1,5 @@
 <template>
-  <div class="home home-view">
+  <div class="home home-view slider">
     <header class="home-header">
       <AppHeader></AppHeader>
       <div class="home-title-wrapper">
@@ -38,15 +38,15 @@
         <h1 class="intro-heading">Projects</h1>
         <ul class="intro-project-list">
           <li class="intro-project-list-item">
-            <router-link to="/projects" class="intro-project-list-link"></router-link>
+            <router-link to="/projects/weather_app" class="intro-project-list-link"></router-link>
             <p class="intro-project-list-text">Weather App</p>
           </li>
           <li class="intro-project-list-item">
-            <router-link to="/projects" class="intro-project-list-link"></router-link>
+            <router-link to="/projects/rostered" class="intro-project-list-link"></router-link>
             <p class="intro-project-list-text">Rostered</p>
           </li>
           <li class="intro-project-list-item">
-            <router-link to="/projects" class="intro-project-list-link"></router-link>
+            <router-link to="/projects/modern_web" class="intro-project-list-link"></router-link>
             <p class="intro-project-list-text">Modern Web</p>
           </li>
         </ul>
@@ -82,6 +82,9 @@ export default {
           $(".ham").css("background-color", "#F3F4F1");
         }
       }
+    },
+    mounted() {
+      
     },
     created() {
       window.addEventListener('scroll', this.handleScroll);

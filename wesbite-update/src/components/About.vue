@@ -1,15 +1,21 @@
 <template>
-  <div class="about-view">
+  <div class="about-view slider">
     <div class="about-wrapper">
       <AppHeader></AppHeader>
       <section class="greetings">
         <div class="greetings-left">
           <h1 class="greetings-heading">Nice to meet you!</h1>
           <h2 class="greetings-intro">I'm a developer, communicator and all around problem solver living in the Metro Detroit area. Let's start a conversation about how I can help you today.</h2>
-          <p class="greetings-text"></p>
+          <p class="greetings-text">Every man who has lotted here over the centuries, has looked up to the light and imagined climbing to freedom. So easy, so simple! And like shipwrecked men turning to seawater foregoing uncontrollable thirst, many have died trying. And then here there can be no true despair without hope. So as I terrorize Gotham, I will feed its people hope to poison their souls. I will let them believe that they can survive so that you can watch them climbing over each other to stay in the sun. You can watch me torture an entire city. And then when you've truly understood the depth of your failure, we will fulfill Ra's Al Ghul's destiny. We will destroy Gotham. And then, when that is done, and Gotham is... ashes Then you have my permission to die.</p>
+          <span v-if="aboutShowing === false" @click="toggleAbout" class="greetings-text-toggle"><font-awesome-icon class="greetings-text-toggle-icon" icon="plus" />Show More</span>
+          <span v-if="aboutShowing === true" @click="toggleAbout" class="greetings-text-toggle"><font-awesome-icon class="greetings-text-toggle-icon" icon="minus" />Show Less</span>
         </div>
         <div class="greetings-right">
           <span class="greetings-image"></span>
+          <a href="" class="greetings-social linkedin"></a>
+          <a href="" class="greetings-social insta"></a>
+          <a href="" class="greetings-social github"></a>
+          <a href="" class="greetings-social codepen"></a>
         </div>
       </section>
       <section class="skills">
@@ -69,7 +75,7 @@ export default {
     },
     data() {
         return {
-
+          aboutShowing: false
         };
     },
     methods: {
@@ -79,6 +85,10 @@ export default {
         } else {
           $(".ham").css("background-color", "#002244");
         }
+      },
+      toggleAbout() {
+        $('.greetings-text').slideToggle();
+        this.aboutShowing = !this.aboutShowing;
       }
     },
     mounted() {
@@ -101,12 +111,4 @@ export default {
 @import "@/assets/stylesheets/reset.scss";
 @import "@/assets/stylesheets/fonts.scss";
 @import "@/assets/stylesheets/about.scss";
-</style>
-
-<style lang="scss" scoped>
-
-/* .ham {
-  background-color: #002244;
-} */
-
 </style>
